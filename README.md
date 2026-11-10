@@ -1,4 +1,4 @@
-# <div align="center">
+<div align="center">
 
   <img src="icon.png" width="120" alt="Blaze Logo" style="border-radius: 50%;">
   <h1>Blaze Programming Language</h1>
