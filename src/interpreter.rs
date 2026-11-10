@@ -184,7 +184,10 @@ impl Interpreter {
                 let match_val = self.eval_expr(expr);
                 for (case_expr, body) in cases {
                     if self.eval_expr(case_expr) == match_val {
-                        return self.exec_block(body);
+                        return match self.exec_block(body) {
+                            Some(Flow::Break) => None,
+                            other => other,
+                        };
                     }
                 }
                 if let Some(def) = default_case {

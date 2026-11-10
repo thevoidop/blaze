@@ -23,7 +23,7 @@ fn is_int_type(t: &Type) -> bool {
 }
 
 fn is_float_type(t: &Type) -> bool {
-    matches!(t, Type::Float32 | Type::Float64)
+    matches!(t, Type::Float | Type::Float32)
 }
 
 pub struct SemanticAnalyzer {
@@ -101,7 +101,16 @@ impl SemanticAnalyzer {
                 if !var_info.is_mut {
                     panic!("Cannot reassign const '{}'", name);
                 }
-                self.eval_type(value);
+                let val_type = self.eval_type(value);
+                let compatible = var_info.var_type == val_type
+                    || (is_int_type(&var_info.var_type) && is_int_type(&val_type))
+                    || (is_float_type(&var_info.var_type) && is_float_type(&val_type));
+                if !compatible {
+                    panic!(
+                        "Type mismatch on assignment to '{}': expected {:?}, got {:?}",
+                        name, var_info.var_type, val_type
+                    );
+                }
             }
             Stmt::FunctionDecl {
                 name,
@@ -170,6 +179,7 @@ impl SemanticAnalyzer {
                 default_case,
             } => {
                 let main_type = self.eval_type(expr);
+                self.loop_depth += 1;
                 for (case_expr, body) in cases {
                     if self.eval_type(case_expr) != main_type {
                         panic!("Match case type mismatch");
@@ -183,6 +193,7 @@ impl SemanticAnalyzer {
                     self.analyze(def);
                     self.exit_scope();
                 }
+                self.loop_depth -= 1;
             }
             Stmt::Break | Stmt::Continue => {
                 if self.loop_depth == 0 {
@@ -220,7 +231,7 @@ impl SemanticAnalyzer {
     fn eval_type(&mut self, expr: &Expr) -> Type {
         match expr {
             Expr::IntLit(_) => Type::Int,
-            Expr::FloatLit(_) => Type::Float64,
+            Expr::FloatLit(_) => Type::Float,
             Expr::StringLit(_) => Type::String,
             Expr::BoolLit(_) => Type::Bool,
             Expr::CharLit(_) => Type::Char,
@@ -283,7 +294,7 @@ impl SemanticAnalyzer {
 
                 let res_type = if both_numeric {
                     if is_float_type(&l_type) || is_float_type(&r_type) {
-                        Type::Float64
+                        Type::Float
                     } else {
                         Type::Int
                     }

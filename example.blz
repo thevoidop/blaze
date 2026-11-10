@@ -1,7 +1,7 @@
 // example.blz
 
 const int32 MAX_ATTEMPTS = 3;
-const float64 TAX_RATE = 0.18;
+const float TAX_RATE = 0.18;
 
 // Function with typed params, a default param, and a return type
 fn add(a: int, b: int = 10) -> int {
@@ -22,15 +22,15 @@ fn grade(score: int) -> string {
 }
 
 // Function with no return type, using match / case / default
-fn describe_command(cmd: char) {
+fn describe_command(cmd: string) {
     match cmd {
-        case 'a': {
+        case "a": {
             print("Add selected.");
         }
-        case 'g': {
+        case "g": {
             print("Grade selected.");
         }
-        case 'q': {
+        case "q": {
             print("Quitting.");
         }
         default: {
@@ -68,7 +68,7 @@ print("=== Blaze Full Example ===");
 // Typed declarations (both orders you use)
 let int32 age = 25;
 let bool is_admin = true;
-let float64 price = 199.99;
+let float price = 199.99;
 let string role = is_admin ? "Administrator" : "Guest";
 let char first_letter = 'B';
 let nothing = null;
@@ -97,8 +97,7 @@ while countdown > 0 {
 }
 
 // Function calls
-describe_command('a');
-describe_command('z');
+describe_command(command);
 
 let result = add(5);
 let result2 = add(5, 20);

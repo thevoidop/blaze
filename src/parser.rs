@@ -107,7 +107,8 @@ impl Parser {
     fn parse_type(&mut self) -> Type {
         match self.consume() {
             Token::IntType => Type::Int,
-            Token::FloatType => Type::Float64,
+            Token::FloatType => Type::Float,
+            Token::Float32Type => Type::Float32, // <-- Added
             Token::StringType => Type::String,
             Token::BoolType => Type::Bool,
             Token::CharType => Type::Char,
@@ -134,6 +135,7 @@ impl Parser {
                 | Token::StringType
                 | Token::BoolType
                 | Token::FloatType
+                | Token::Float32Type
                 | Token::CharType
                 | Token::OpenBracket
         ) {

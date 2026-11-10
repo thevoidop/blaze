@@ -7,7 +7,7 @@
 
   <p>
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-orange.svg" alt="License: MIT"></a>
-    <a href="#"><img src="https://img.shields.io/badge/Version-0.0.1-brightgreen.svg" alt="Version"></a>
+    <a href="#"><img src="https://img.shields.io/badge/Version-0.2.1-brightgreen.svg" alt="Version"></a>
     <a href="#"><img src="https://img.shields.io/badge/Rust-Edition%202021-orange.svg" alt="Rust Edition"></a>
     <a href="#"><img src="https://img.shields.io/badge/Platform-macOS%20%7C%20Linux%20%7C%20Windows-blue.svg" alt="Platform"></a>
   </p>
@@ -23,7 +23,7 @@ Blaze is a modern, statically typed systems programming language designed to bri
 
 ## ✨ Key Features
 
-- **Static Type Safety:** Catch type errors at compile time with a rigorous semantic analyzer supporting integers (`int`, `int8`, `int32`, `int64`, `uint`, `uint8`, `uint32`, `uint64`), floating-point numbers (`float32`, `float64`), booleans, strings, characters, and typed arrays.
+- **Static Type Safety:** Catch type errors at compile time with a rigorous semantic analyzer supporting integers (`int`, `int8`, `int32`, `int64`, `uint`, `uint8`, `uint32`, `uint64`), floating-point numbers (`float[64-bit]`, `float32`), booleans, strings, characters, and typed arrays.
 - **Blazing Native Performance:** Bypasses virtual machines, garbage collectors, and dynamic interpreter overhead entirely. In rigorous stress tests (such as computing over 740 million Collatz hailstone iterations), natively compiled Blaze binaries execute up to **100x faster** than standard Python implementations.
 - **Expressive & Modern Syntax:** Features clean, highly readable control flows including `if / elif / else` branching ladders, pattern matching via `match / case / default`, `while` loops, and `for / range` iterators.
 - **Dual Execution Modes:** Run scripts instantly for rapid prototyping using the built-in tree-walking interpreter, or transpile and compile them into standalone native binaries for production performance.
