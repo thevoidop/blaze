@@ -1,0 +1,10 @@
+{
+  "iconDefinitions": {
+    "blaze-file": {
+      "iconPath": "./blaze-icon.svg"
+    }
+  },
+  "fileExtensions": {
+    "blz": "blaze-file"
+  }
+}

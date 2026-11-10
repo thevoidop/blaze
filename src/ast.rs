@@ -1,0 +1,172 @@
+#![allow(dead_code)]
+
+#[derive(Debug, Clone, PartialEq)]
+pub enum Type {
+    Int,
+    Int8,
+    Int32,
+    Int64,
+    Uint,
+    Uint8,
+    Uint32,
+    Uint64,
+    Float32,
+    Float64,
+    Bool,
+    String,
+    Char,
+    Void,
+    Null,
+    Array(Box<Type>),
+}
+
+#[derive(Debug, Clone, PartialEq)]
+pub enum Token {
+    Let,
+    Const,
+    If,
+    Elif,
+    Else,
+    For,
+    In,
+    Range,
+    While,
+    Break,
+    Continue,
+    Match,
+    Case,
+    Default,
+    Fn,
+    Return,
+    Null,
+    IntType,
+    StringType,
+    BoolType,
+    FloatType,
+    CharType,
+    Ident(String),
+    IntLit(i64),
+    FloatLit(f64),
+    StringLit(String),
+    BoolLit(bool),
+    CharLit(char),
+    Plus,
+    Minus,
+    PlusPlus,
+    MinusMinus,
+    Multiply,
+    Divide,
+    Modulo,
+    Assign,
+    Equals,
+    NotEquals,
+    GreaterThan,
+    LessThan,
+    LessEq,
+    GreaterEq,
+    And,
+    Or,
+    Not,
+    Question,
+    Colon,
+    Dot,
+    OpenParen,
+    CloseParen,
+    OpenBrace,
+    CloseBrace,
+    OpenBracket,
+    CloseBracket,
+    Comma,
+    Semi,
+    EOF,
+}
+
+#[derive(Debug, Clone, PartialEq)]
+pub struct Param {
+    pub name: String,
+    pub param_type: Type,
+    pub default_val: Option<Expr>,
+}
+
+#[derive(Debug, Clone, PartialEq)]
+pub enum Expr {
+    IntLit(i64),
+    FloatLit(f64),
+    StringLit(String),
+    BoolLit(bool),
+    CharLit(char),
+    NullLit,
+    Ident(String),
+    ArrayLit(Vec<Expr>),
+    ArrayIndex {
+        array: Box<Expr>,
+        index: Box<Expr>,
+    },
+    MethodCall {
+        obj: Box<Expr>,
+        method: String,
+        args: Vec<Expr>,
+    },
+    FunctionCall {
+        name: String,
+        args: Vec<Expr>,
+    },
+    BinaryOp(Box<Expr>, Token, Box<Expr>),
+    UnaryOp(Token, Box<Expr>),
+    PreIncrement(String),
+    PreDecrement(String),
+    Ternary {
+        cond: Box<Expr>,
+        true_expr: Box<Expr>,
+        false_expr: Box<Expr>,
+    },
+}
+
+#[derive(Debug, Clone, PartialEq)]
+pub enum Stmt {
+    VarDecl {
+        name: String,
+        is_mut: bool,
+        explicit_type: Option<Type>,
+        value: Expr,
+    },
+    Assign {
+        name: String,
+        value: Expr,
+    },
+    ArrayIndexAssign {
+        array_name: String,
+        index: Expr,
+        value: Expr,
+    },
+    ExprStmt(Expr),
+    Print(Expr),
+    If {
+        cond: Expr,
+        body: Vec<Stmt>,
+        else_body: Option<Vec<Stmt>>,
+    },
+    While {
+        cond: Expr,
+        body: Vec<Stmt>,
+    },
+    ForRange {
+        iter_var: String,
+        max: Expr,
+        body: Vec<Stmt>,
+    },
+    Match {
+        expr: Expr,
+        cases: Vec<(Expr, Vec<Stmt>)>,
+        default_case: Option<Vec<Stmt>>,
+    },
+    Break,
+    Continue,
+    Return(Option<Expr>),
+    FunctionDecl {
+        name: String,
+        params: Vec<Param>,
+        ret_type: Type,
+        body: Vec<Stmt>,
+    },
+}

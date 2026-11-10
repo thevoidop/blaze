@@ -1,0 +1,33 @@
+{
+  "name": "blaze",
+  "displayName": "Blaze",
+  "description": "Blaze language support",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "blaze",
+        "aliases": [
+          "Blaze",
+          "blaze"
+        ],
+        "extensions": [
+          ".blz"
+        ]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "blaze",
+        "scopeName": "source.blaze",
+        "path": "./syntaxes/blaze.tmLanguage.json"
+      }
+    ]
+  }
+}

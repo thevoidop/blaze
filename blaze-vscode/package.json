@@ -1,0 +1,45 @@
+{
+  "name": "blaze-vscode",
+  "displayName": "Blaze Language Support",
+  "description": "Syntax highlighting, auto-formatting, and icons for Blaze",
+  "version": "0.0.1",
+  "publisher": "local",
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "main": "./extension.js",
+  "categories": [
+    "Programming Languages",
+    "Formatters"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "blaze",
+        "aliases": [
+          "Blaze",
+          "blaze"
+        ],
+        "extensions": [
+          ".blz"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "blaze",
+        "scopeName": "source.blaze",
+        "path": "./syntaxes/blaze.tmLanguage.json"
+      }
+    ],
+    "iconThemes": [
+      {
+        "id": "blaze-icon-theme",
+        "label": "Blaze File Icons",
+        "path": "./blaze-icon-theme.json"
+      }
+    ]
+  }
+}

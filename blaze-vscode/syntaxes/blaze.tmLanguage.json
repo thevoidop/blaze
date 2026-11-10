@@ -1,0 +1,93 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Blaze",
+  "scopeName": "source.blaze",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#functions" },
+    { "include": "#keywords" },
+    { "include": "#types" },
+    { "include": "#numbers" },
+    { "include": "#identifiers" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.blaze",
+          "match": "//.*$"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.blaze",
+          "begin": "\"",
+          "end": "\""
+        },
+        {
+          "name": "string.quoted.single.blaze",
+          "begin": "'",
+          "end": "'"
+        }
+      ]
+    },
+    "functions": {
+      "patterns": [
+        {
+          "name": "support.function.builtin.blaze",
+          "match": "\\b(print|input)\\b"
+        },
+        {
+          "match": "\\bfn\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\b",
+          "captures": {
+            "0": { "name": "keyword.control.blaze" },
+            "1": { "name": "entity.name.function.blaze" }
+          }
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.blaze",
+          "match": "\\b(if|elif|else|while|for|in|range|break|continue|return|match|case|default)\\b"
+        },
+        {
+          "name": "keyword.declaration.blaze",
+          "match": "\\b(let|const)\\b"
+        },
+        {
+          "name": "constant.language.boolean.blaze",
+          "match": "\\b(true|false|null)\\b"
+        }
+      ]
+    },
+    "types": {
+      "patterns": [
+        {
+          "name": "entity.name.type.blaze",
+          "match": "\\b(int|int8|int32|int64|uint|uint8|uint32|uint64|float32|float64|string|bool|char)\\b"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.blaze",
+          "match": "\\b\\d+(\\.\\d+)?\\b"
+        }
+      ]
+    },
+    "identifiers": {
+      "patterns": [
+        {
+          "name": "variable.other.blaze",
+          "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b"
+        }
+      ]
+    }
+  }
+}

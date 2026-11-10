@@ -1,0 +1,112 @@
+// example.blz
+
+const int32 MAX_ATTEMPTS = 3;
+const float64 TAX_RATE = 0.18;
+
+// Function with typed params, a default param, and a return type
+fn add(a: int, b: int = 10) -> int {
+    return a + b;
+}
+
+// Function using if / elif / else and logical operators
+fn grade(score: int) -> string {
+    if score >= 90 and score <= 100 {
+        return "A";
+    } elif score >= 75 {
+        return "B";
+    } elif score >= 50 or score == 49 {
+        return "C";
+    } else {
+        return "F";
+    }
+}
+
+// Function with no return type, using match / case / default
+fn describe_command(cmd: char) {
+    match cmd {
+        case 'a': {
+            print("Add selected.");
+        }
+        case 'g': {
+            print("Grade selected.");
+        }
+        case 'q': {
+            print("Quitting.");
+        }
+        default: {
+            print("Unknown command.");
+        }
+    }
+}
+
+// Function using for/range, continue, break, arrays, .len()
+fn sum_valid(values: int) -> int {
+    let numbers = [5, -3, 12, 0, 40, 99, 7];
+    let total = 0;
+
+    for i in range(numbers.len()) {
+        let n = numbers[i];
+
+        if n < 0 {
+            continue;            // skip negatives
+        }
+        if n == 99 {
+            break;               // stop at 99
+        }
+        total = total + n;
+    }
+    return total;
+}
+
+// Function returning bool, using not and ternary
+fn is_even(n: int) -> bool {
+    return not (n % 2 != 0);
+}
+
+print("=== Blaze Full Example ===");
+
+// Typed declarations (both orders you use)
+let int32 age = 25;
+let bool is_admin = true;
+let float64 price = 199.99;
+let string role = is_admin ? "Administrator" : "Guest";
+let char first_letter = 'B';
+let nothing = null;
+
+print(role);
+print(price * (1 + TAX_RATE));
+
+// input
+let name = input("Enter your name: ");
+print("Hello, ");
+print(name);
+
+let command = input("Command (a/g/q): ");
+
+// while loop with ++ and --
+let attempts = 0;
+while attempts < MAX_ATTEMPTS {
+    attempts++;
+    print(attempts);
+}
+
+let countdown = 3;
+while countdown > 0 {
+    print(countdown);
+    countdown--;
+}
+
+// Function calls
+describe_command('a');
+describe_command('z');
+
+let result = add(5);
+let result2 = add(5, 20);
+print(result);
+print(result2);
+
+print(grade(82));
+print(sum_valid(0));
+print(is_even(10) ? "even" : "odd");
+
+print("=== Done ===");
